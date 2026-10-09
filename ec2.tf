@@ -64,18 +64,27 @@ resource "aws_security_group" "my_security_group" {
 
 
 resource "aws_instance" "my_instance" {
+    # count = 3 #meta argument
+    for_each = tomap({
+        Server-through-terraform-micro = "t2.micro"
+        Server-through-terraform-medium = "t2.medium"
+    }) # meta argument
+
+
+    depends_on = [ aws_security_group.my_security_group, aws_key_pair.my_key ]
+
     key_name = aws_key_pair.my_key.key_name
     security_groups = [ aws_security_group.my_security_group.name ]
-    instance_type = var.ec2_instance_type
+    instance_type = each.value
     ami = var.ec2_ami_id #ubuntu
     user_data = file("install_nginx.sh")
 
     root_block_device {
-      volume_size = var.ec2_root_storage_size
+      volume_size = var.env == "prod" ? 20 : var.ec2_default_root_storage_size
       volume_type = "gp3"
     }
     tags = {
-        Name = "server through terraform template"
+        Name = each.key
     }
   
 }
