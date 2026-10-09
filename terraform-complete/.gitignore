@@ -1,0 +1,15 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+override.tf
+override.tf.json
+
+# SSH keys (IMPORTANT)
+terra-key-ec2
+terra-key-ec2.*
+*.pem
+*.ppk
+*.pub
