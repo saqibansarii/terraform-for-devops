@@ -66,8 +66,10 @@ resource "aws_security_group" "my_security_group" {
 resource "aws_instance" "my_instance" {
     # count = 3 #meta argument
     for_each = tomap({
-        Server-through-terraform-micro = "t2.micro"
-        Server-through-terraform-medium = "t2.medium"
+        Server-through-terraform-micro = "t3.micro"
+        Server-through-terraform-medium = "t3.medium"
+        Server-through-terraform-small = "t3.small"
+
     }) # meta argument
 
 

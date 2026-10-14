@@ -12,7 +12,7 @@ variable "ec2_default_root_storage_size" {
 
 
 variable "ec2_ami_id" {
-    default = "ami-0ea1cddefe0c4aed5"
+    default = "ami-0199ac7c9fbf9ed83"
     type = string
   
 }
