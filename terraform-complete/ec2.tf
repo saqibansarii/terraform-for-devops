@@ -87,6 +87,7 @@ resource "aws_instance" "my_instance" {
     }
     tags = {
         Name = each.key
+        Environment = var.env
     }
   
 }
