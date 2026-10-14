@@ -69,6 +69,7 @@ resource "aws_instance" "my_instance" {
         Server-through-terraform-micro = "t3.micro"
         Server-through-terraform-medium = "t3.medium"
         Server-through-terraform-small = "t3.small"
+        
 
     }) # meta argument
 
