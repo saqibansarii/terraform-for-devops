@@ -19,6 +19,6 @@ variable "ec2_ami_id" {
 
 
 variable "env" {
-  default = "prod"
+  default = "dev"
   type = string
 }
