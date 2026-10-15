@@ -1,8 +1,11 @@
 # key pair
 
 resource "aws_key_pair" "my_key" {
-    key_name = "terra-key-ec2"
+    key_name = "${var.env}-terra-key-ec2"
     public_key = file("terra-key-ec2.pub")
+    tags = {
+        Environment = var.env
+    }
 }
 
 #VPC & security Group
@@ -13,7 +16,7 @@ resource "aws_default_vpc" "default" {
 
 
 resource "aws_security_group" "my_security_group" {
-    name = "automate_sg"
+    name = "${var.env}-automate-sg"
     description = "this will add a TF generated Security Group"
     vpc_id = aws_default_vpc.default.id 
     #interpolation is a way in which you can inherit or extract the values from the terraform block.
@@ -55,7 +58,8 @@ resource "aws_security_group" "my_security_group" {
     
 
     tags = {
-    Name = "allow_tls"
+    Name = "${var.env}-automate-sg"
+    Environment = var.env
   }
   
 }
@@ -67,8 +71,7 @@ resource "aws_instance" "my_instance" {
     # count = 3 #meta argument
     for_each = tomap({
         Server-through-terraform-micro = "t3.micro"
-        Server-through-terraform-medium = "t3.medium"
-        Server-through-terraform-small = "t3.small"
+        
         
 
     }) # meta argument
